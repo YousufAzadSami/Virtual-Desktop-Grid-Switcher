@@ -45,6 +45,14 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0-windows10.0.19041.0'">
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.6.5" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows10.0.19041.0' Or '$(TargetFramework)' == 'net7.0-windows10.0.19041.0'">
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.1" />
+  </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="Interop\Build20348_0000\.interfaces\IVirtualDesktop.cs" />
     <EmbeddedResource Include="Interop\Build20348_0000\.interfaces\IVirtualDesktopManagerInternal.cs" />
