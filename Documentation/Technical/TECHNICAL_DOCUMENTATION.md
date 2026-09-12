@@ -68,8 +68,8 @@ Project lineage:
 │   ├── UserGuide/                               # User guide and images
 │   └── Technical/
 │       ├── TECHNICAL_DOCUMENTATION.md           # This canonical architecture/navigation guide
-│       ├── WINDOWS_11_24H2_FIX_GUIDE.md         # Windows compatibility implementation/test notes
-│       ├── MIGRATION_TO_NET8.md                 # Fork's .NET 8 migration record
+│       ├── WINDOWS_COMPATIBILITY.md              # Windows compatibility implementation/test notes
+│       ├── NET8_MIGRATION_RECORD.md              # Fork's .NET 8 migration record
 │       └── ERROR_HANDLING_LOGGING_PLAN.md       # Detailed proposal; not implemented
 ├── Package/                                     # Historical distribution payload/icons/docs
 ├── ROADMAP.md                                   # Prioritized work and release prerequisites
@@ -280,7 +280,7 @@ The project is a self-contained `WinExe`; the project reference builds the vendo
 
 There are **no test projects**. Do not mistake a successful build for complete COM/runtime compatibility. A full local Release build during consolidation completed with **0 errors and 314 warnings**. Most concern Windows platform annotations and nullable analysis; the build also warns that the legacy explicit `System.Data.Linq` reference cannot be resolved.
 
-A separate read-only COM smoke test passed on Windows 11 25H2 build 26200.8037. It selected `VirtualDesktopProvider26100`, compiled interfaces without using an existing cache, enumerated desktops, and resolved the current desktop. It did not create, remove, switch, or move anything; see `Documentation/Technical/WINDOWS_11_24H2_FIX_GUIDE.md` for scope.
+A separate read-only COM smoke test passed on Windows 11 25H2 build 26200.8037. It selected `VirtualDesktopProvider26100`, compiled interfaces without using an existing cache, enumerated desktops, and resolved the current desktop. It did not create, remove, switch, or move anything; see `Documentation/Technical/WINDOWS_COMPATIBILITY.md` for scope.
 
 There is no active root-level GitHub Actions workflow. Workflows under `VirtualDesktop-master/.github/` belong to the vendored library snapshot, target its nested solution/branch conventions, and still mention .NET 7.
 
@@ -306,8 +306,8 @@ These are navigation warnings, not an exhaustive bug list:
 
 - This file is the single canonical architecture and code-navigation guide.
 - `Documentation/UserGuide/...md` and `Documentation/Installation/...md` explain user-facing behavior, but contain historical statements; compare them with current code.
-- `Documentation/Technical/WINDOWS_11_24H2_FIX_GUIDE.md` records the exact compatibility implementation and test scope; it is not proof for every future Windows revision.
-- `Documentation/Technical/MIGRATION_TO_NET8.md` records the current framework migration; project files are the final authority.
+- `Documentation/Technical/WINDOWS_COMPATIBILITY.md` records the exact compatibility implementation and test scope; it is not proof for every future Windows revision.
+- `Documentation/Technical/NET8_MIGRATION_RECORD.md` records the current framework migration; project files are the final authority.
 - `ROADMAP.md` and `Documentation/Technical/ERROR_HANDLING_LOGGING_PLAN.md` describe proposed work, not implemented features.
 - `.hgignore`, `.hgtags`, root `Windows10SDKVS13_*.props`, and much of `Package/` are historical/migration artifacts.
 - `VirtualDesktop-master/README.md` and its nested workflows reflect the vendored library snapshot and are stale regarding this application fork's .NET 8-only target.

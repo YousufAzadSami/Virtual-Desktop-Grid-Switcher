@@ -9,8 +9,8 @@ A Windows 10/11 notification-area application that arranges virtual desktops as 
 - [Technical documentation and codebase navigation](Documentation/Technical/TECHNICAL_DOCUMENTATION.md)
 - [Installation guide](Documentation/Installation/VirtualDesktopGridSwitcher_Installation.md)
 - [User guide](Documentation/UserGuide/VirtualDesktopGridSwitcher_UserGuide.md)
-- [Windows 11 24H2/25H2 compatibility notes](Documentation/Technical/WINDOWS_11_24H2_FIX_GUIDE.md)
-- [.NET 8 migration](Documentation/Technical/MIGRATION_TO_NET8.md)
+- [Windows compatibility notes](Documentation/Technical/WINDOWS_COMPATIBILITY.md)
+- [.NET 8 migration record](Documentation/Technical/NET8_MIGRATION_RECORD.md)
 - [Project roadmap](ROADMAP.md)
 - [Error-handling and logging plan](Documentation/Technical/ERROR_HANDLING_LOGGING_PLAN.md)
 

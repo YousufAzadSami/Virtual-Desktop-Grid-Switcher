@@ -32,7 +32,7 @@ Complete this before automatic startup or broad installer distribution.
 - [ ] Add a non-destructive diagnostics command that reports OS build/UBR, provider, IID set, and generated assembly.
 - [ ] Monitor Microsoft Release Health and maintained VirtualDesktop implementations for ABI changes.
 - [ ] Warn on builds newer than the newest tested build without blindly blocking compatible updates.
-- [ ] Document exact test evidence in `Documentation/Technical/WINDOWS_11_24H2_FIX_GUIDE.md` or a future compatibility matrix.
+- [ ] Document exact test evidence in `Documentation/Technical/WINDOWS_COMPATIBILITY.md`.
 
 A new provider should be added only when an interface GUID or ABI actually changes, not for every monthly cumulative update.
 
