@@ -63,12 +63,15 @@ Project lineage:
 │   ├── src/VirtualDesktop.WinForms/             # Not in the main solution
 │   ├── samples/                                 # Showcase; not in the main solution
 │   └── .github/workflows/                       # Vendored library CI, not root-repo CI
-├── Documentation/                               # Installation and user guides, plus PDFs/images
+├── Documentation/
+│   ├── Installation/                            # Installation guide and images
+│   ├── UserGuide/                               # User guide and images
+│   └── Technical/
+│       ├── TECHNICAL_DOCUMENTATION.md           # This canonical architecture/navigation guide
+│       ├── WINDOWS_11_24H2_FIX_GUIDE.md         # Windows compatibility implementation/test notes
+│       ├── MIGRATION_TO_NET8.md                 # Fork's .NET 8 migration record
+│       └── ERROR_HANDLING_LOGGING_PLAN.md       # Detailed proposal; not implemented
 ├── Package/                                     # Historical distribution payload/icons/docs
-├── TECHNICAL_DOCUMENTATION.md                   # This canonical architecture/navigation guide
-├── WINDOWS_11_24H2_FIX_GUIDE.md                 # Windows compatibility implementation/test notes
-├── MIGRATION_TO_NET8.md                         # Fork's .NET 8 migration record
-├── ERROR_HANDLING_LOGGING_PLAN.md               # Detailed proposal; not implemented
 ├── ROADMAP.md                                   # Prioritized work and release prerequisites
 └── Windows10SDKVS13_*.props, .hg*               # Historical migration artifacts
 ```
@@ -256,7 +259,7 @@ The IID data has multiple representations. `IID.GetIIDs()` enumerates properties
 | Support a Windows build | `VirtualDesktop.system.cs`, `Interop/Build*/` | builder, IID/settings files, cache |
 | Change app version | `VirtualDesktopGridSwitcher/Properties/AssemblyInfo.cs` | package/docs |
 | Change library package version | `VirtualDesktop-master/src/Directory.Build.props` | nested publish workflow/package metadata |
-| Work on error handling/logging | `ERROR_HANDLING_LOGGING_PLAN.md` | startup, empty catches, settings load/save |
+| Work on error handling/logging | `Documentation/Technical/ERROR_HANDLING_LOGGING_PLAN.md` | startup, empty catches, settings load/save |
 
 ## Build, test, and run
 
@@ -277,7 +280,7 @@ The project is a self-contained `WinExe`; the project reference builds the vendo
 
 There are **no test projects**. Do not mistake a successful build for complete COM/runtime compatibility. A full local Release build during consolidation completed with **0 errors and 314 warnings**. Most concern Windows platform annotations and nullable analysis; the build also warns that the legacy explicit `System.Data.Linq` reference cannot be resolved.
 
-A separate read-only COM smoke test passed on Windows 11 25H2 build 26200.8037. It selected `VirtualDesktopProvider26100`, compiled interfaces without using an existing cache, enumerated desktops, and resolved the current desktop. It did not create, remove, switch, or move anything; see `WINDOWS_11_24H2_FIX_GUIDE.md` for scope.
+A separate read-only COM smoke test passed on Windows 11 25H2 build 26200.8037. It selected `VirtualDesktopProvider26100`, compiled interfaces without using an existing cache, enumerated desktops, and resolved the current desktop. It did not create, remove, switch, or move anything; see `Documentation/Technical/WINDOWS_11_24H2_FIX_GUIDE.md` for scope.
 
 There is no active root-level GitHub Actions workflow. Workflows under `VirtualDesktop-master/.github/` belong to the vendored library snapshot, target its nested solution/branch conventions, and still mention .NET 7.
 
@@ -303,9 +306,9 @@ These are navigation warnings, not an exhaustive bug list:
 
 - This file is the single canonical architecture and code-navigation guide.
 - `Documentation/UserGuide/...md` and `Documentation/Installation/...md` explain user-facing behavior, but contain historical statements; compare them with current code.
-- `WINDOWS_11_24H2_FIX_GUIDE.md` records the exact compatibility implementation and test scope; it is not proof for every future Windows revision.
-- `MIGRATION_TO_NET8.md` records the current framework migration; project files are the final authority.
-- `ROADMAP.md` and `ERROR_HANDLING_LOGGING_PLAN.md` describe proposed work, not implemented features.
+- `Documentation/Technical/WINDOWS_11_24H2_FIX_GUIDE.md` records the exact compatibility implementation and test scope; it is not proof for every future Windows revision.
+- `Documentation/Technical/MIGRATION_TO_NET8.md` records the current framework migration; project files are the final authority.
+- `ROADMAP.md` and `Documentation/Technical/ERROR_HANDLING_LOGGING_PLAN.md` describe proposed work, not implemented features.
 - `.hgignore`, `.hgtags`, root `Windows10SDKVS13_*.props`, and much of `Package/` are historical/migration artifacts.
 - `VirtualDesktop-master/README.md` and its nested workflows reflect the vendored library snapshot and are stale regarding this application fork's .NET 8-only target.
 

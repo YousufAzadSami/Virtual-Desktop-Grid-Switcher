@@ -21,7 +21,7 @@ Complete this before automatic startup or broad installer distribution.
 - [ ] Remove the duplicate COM switch in the `Current` setter.
 - [ ] Close native process handles and reduce requested process access rights.
 - [ ] Validate positive grid dimensions and desktop/icon limits.
-- [ ] Add production logging and global managed exception handling; see `ERROR_HANDLING_LOGGING_PLAN.md`.
+- [ ] Add production logging and global managed exception handling; see `Documentation/Technical/ERROR_HANDLING_LOGGING_PLAN.md`.
 - [ ] Report unsupported or untested Windows builds with actionable diagnostics.
 
 ## 2. Windows compatibility
@@ -32,7 +32,7 @@ Complete this before automatic startup or broad installer distribution.
 - [ ] Add a non-destructive diagnostics command that reports OS build/UBR, provider, IID set, and generated assembly.
 - [ ] Monitor Microsoft Release Health and maintained VirtualDesktop implementations for ABI changes.
 - [ ] Warn on builds newer than the newest tested build without blindly blocking compatible updates.
-- [ ] Document exact test evidence in `WINDOWS_11_24H2_FIX_GUIDE.md` or a future compatibility matrix.
+- [ ] Document exact test evidence in `Documentation/Technical/WINDOWS_11_24H2_FIX_GUIDE.md` or a future compatibility matrix.
 
 A new provider should be added only when an interface GUID or ABI actually changes, not for every monthly cumulative update.
 

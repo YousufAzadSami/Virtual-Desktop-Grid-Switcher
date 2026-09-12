@@ -1,6 +1,6 @@
 # Windows 11 24H2 Compatibility Notes
 
-This document records the Windows build-specific COM work incorporated into this fork. It is deliberately narrower than `TECHNICAL_DOCUMENTATION.md`, which is the canonical architecture and navigation guide.
+This document records the Windows build-specific COM work incorporated into this fork. It is deliberately narrower than `Documentation/Technical/TECHNICAL_DOCUMENTATION.md`, which is the canonical architecture and navigation guide.
 
 ## Current status
 

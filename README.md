@@ -6,13 +6,13 @@ A Windows 10/11 notification-area application that arranges virtual desktops as 
 
 ## Documentation
 
-- [Technical documentation and codebase navigation](TECHNICAL_DOCUMENTATION.md)
+- [Technical documentation and codebase navigation](Documentation/Technical/TECHNICAL_DOCUMENTATION.md)
 - [Installation guide](Documentation/Installation/VirtualDesktopGridSwitcher_Installation.md)
 - [User guide](Documentation/UserGuide/VirtualDesktopGridSwitcher_UserGuide.md)
-- [Windows 11 24H2/25H2 compatibility notes](WINDOWS_11_24H2_FIX_GUIDE.md)
-- [.NET 8 migration](MIGRATION_TO_NET8.md)
+- [Windows 11 24H2/25H2 compatibility notes](Documentation/Technical/WINDOWS_11_24H2_FIX_GUIDE.md)
+- [.NET 8 migration](Documentation/Technical/MIGRATION_TO_NET8.md)
 - [Project roadmap](ROADMAP.md)
-- [Error-handling and logging plan](ERROR_HANDLING_LOGGING_PLAN.md)
+- [Error-handling and logging plan](Documentation/Technical/ERROR_HANDLING_LOGGING_PLAN.md)
 
 ## Build
 
@@ -23,7 +23,7 @@ dotnet restore VirtualDesktopGridSwitcher.sln
 dotnet build VirtualDesktopGridSwitcher.sln --configuration Release
 ```
 
-See `TECHNICAL_DOCUMENTATION.md` before changing or testing the undocumented, Windows-build-specific COM layer.
+See [`Documentation/Technical/TECHNICAL_DOCUMENTATION.md`](Documentation/Technical/TECHNICAL_DOCUMENTATION.md) before changing or testing the undocumented, Windows-build-specific COM layer.
 
 ## Troubleshooting
 
