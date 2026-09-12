@@ -6,7 +6,7 @@ This document records the Windows build-specific COM work incorporated into this
 
 | Windows family | Build | Provider selected | Status in this repository |
 |---|---:|---|---|
-| Windows 10 | 17763–19045 | `Build10240` | Intended support; Windows 10 22H2 has an explicit IID set. Runtime verification is still required. |
+| Windows 10 | 19041–19045 | `Build10240` | The app target begins at build 19041; Windows 10 22H2 has an explicit IID set. Runtime verification is still required. |
 | Windows Server 2022 | 20348 | `Build20348` | Provider and IID set present; not verified during consolidation. |
 | Windows 11 21H2 | 22000 | `Build22000` | Provider and IID set present. |
 | Windows 11 22H2/23H2 | 22621/22631 | `Build22621` | Multiple revision-specific IID sets present. |

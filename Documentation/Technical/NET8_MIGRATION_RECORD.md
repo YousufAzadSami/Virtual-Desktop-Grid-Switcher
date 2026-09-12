@@ -51,8 +51,8 @@ The vendored project is built as part of the application solution; this migratio
 
 ## Compatibility boundaries
 
-- The application declares Windows `10.0.17763.0` (Windows 10 1809) as its minimum supported platform.
-- It compiles against Windows SDK contracts for `10.0.19041.0`.
+- The application declares Windows `10.0.19041.0` (Windows 10 version 2004) as its minimum supported platform.
+- It compiles against Windows SDK contracts for the same `10.0.19041.0` platform version.
 - End users do not need to install the .NET runtime because the application is self-contained.
 - Developers need a .NET 8 SDK and a compatible Windows SDK/Visual Studio 2022 installation.
 - Windows virtual-desktop compatibility is controlled independently by build-specific COM providers and IID settings. Successful compilation does not prove runtime support on a particular Windows update.
