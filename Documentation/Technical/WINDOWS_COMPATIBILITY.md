@@ -11,7 +11,7 @@ This document records the Windows build-specific COM work incorporated into this
 | Windows 11 21H2 | 22000 | `Build22000` | Provider and IID set present. |
 | Windows 11 22H2/23H2 | 22621/22631 | `Build22621` | Multiple revision-specific IID sets present. |
 | Windows 11 24H2 | 26100 | `Build26100` | Uses Slion's 26100.0 ABI and IID set. |
-| Windows 11 25H2 | 26200 | `Build26100` | Read-only COM smoke test passed on 26200.8037. |
+| Windows 11 25H2 | 26200 | `Build26100` | Read-only COM smoke tests passed on 26200.8037 and 26200.9445. |
 
 The provider and IID selectors use the newest known version that is not greater than the current OS version. A separate provider is not required for every cumulative update; one is needed only when Microsoft changes an undocumented interface GUID or ABI.
 
@@ -59,7 +59,9 @@ On Windows 11 25H2 build `26200.8037`, the diagnostic:
 - Resolved the current desktop among them.
 - Did not create, remove, switch, rename, or move anything.
 
-This verifies provider selection, IID loading, runtime Roslyn compilation, and read-only COM calls on that build. It does not verify every mutating operation or native notifications. Native VirtualDesktop notification registration remains disabled in this application; desktop changes are detected by polling.
+A second read-only test passed on build `26200.9445` after a crash dump exposed reuse of a stale build-22621 generated interface assembly. Generated COM cache filenames now include the VirtualDesktop library's module version ID. The test confirmed that the stale cache was ignored, the build-26100 interface was generated and reused on a second run, and `GetDesktops`, `Current`, and `FromId` completed successfully.
+
+This verifies provider selection, IID loading, runtime Roslyn compilation, cache reuse, and read-only COM calls on those builds. It does not verify every mutating operation or native notifications. Native VirtualDesktop notification registration remains disabled in this application; desktop changes are detected by polling.
 
 ## Testing before release
 

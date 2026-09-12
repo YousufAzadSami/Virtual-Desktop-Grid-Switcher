@@ -212,7 +212,7 @@ VirtualDesktopGridManager
 4. For each interface, it selects the newest embedded source whose build is not greater than the current OS.
 5. `IID.GetIIDs()` selects the newest configured IID set not greater than the current OS and falls back to `HKCR\Interface` for missing names.
 6. Placeholder zero GUIDs in the selected C# sources are replaced, and Roslyn compiles a build-specific assembly.
-7. By default it is cached under `%LOCALAPPDATA%\slions.net\VirtualDesktop\assemblies` and shadow-copied when reused in Release builds.
+7. By default it is cached under `%LOCALAPPDATA%\slions.net\VirtualDesktop\assemblies` and shadow-copied when reused in Release builds. The cache filename includes the OS build and the VirtualDesktop assembly's module version ID, preventing generated interfaces from older library source from being reused after an ABI update.
 8. A provider creates wrapper objects for the public `Interop/Proxy` contracts; `ComWrapperBase` invokes methods by matching wrapper method names to generated COM methods.
 
 ### Build-specific files
