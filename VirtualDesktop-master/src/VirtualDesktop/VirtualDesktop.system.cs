@@ -54,7 +54,7 @@ partial class VirtualDesktop
     {
         Version v = OS.Build;
 
-        if (v >= new Version(10, 0, 26100, 863)) 
+        if (v >= new Version(10, 0, 26100, 0))
         {
             return new VirtualDesktopProvider26100();
         }

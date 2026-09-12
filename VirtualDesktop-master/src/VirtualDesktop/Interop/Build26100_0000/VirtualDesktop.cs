@@ -25,7 +25,7 @@ internal class VirtualDesktop : ComWrapperBase<IVirtualDesktop>, IVirtualDesktop
 
     public string GetWallpaperPath()
         => this.InvokeMethod<HString>();
-    
+
     public bool IsRemote()
         => this.InvokeMethod<bool>();
 }

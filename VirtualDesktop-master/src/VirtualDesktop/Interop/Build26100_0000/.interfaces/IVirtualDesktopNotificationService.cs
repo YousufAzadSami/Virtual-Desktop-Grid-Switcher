@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace WindowsDesktop.Interop.Build22631
+namespace WindowsDesktop.Interop.Build26100
 {
     [ComImport]
     [Guid("00000000-0000-0000-0000-000000000000") /* replace at runtime */]

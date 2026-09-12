@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using WindowsDesktop.Interop.Build10240;
 
-namespace WindowsDesktop.Interop.Build22631
+namespace WindowsDesktop.Interop.Build26100
 {
     [ComImport]
     [Guid("00000000-0000-0000-0000-000000000000") /* replace at runtime */]
@@ -44,13 +44,13 @@ namespace WindowsDesktop.Interop.Build22631
         void CopyDesktopState(IApplicationView pView0, IApplicationView pView1);
 
         IVirtualDesktop CreateRemoteDesktop(HString name);
-        
+
         void SwitchRemoteDesktop(IVirtualDesktop desktop);
-        
+
         void SwitchDesktopWithAnimation(IVirtualDesktop desktop);
-        
+
         IVirtualDesktop GetLastActiveDesktop();
-        
+
         void WaitForAnimationToComplete();
     }
 }

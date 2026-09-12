@@ -45,9 +45,6 @@ internal class VirtualDesktopManagerInternal : ComWrapperBase<IVirtualDesktopMan
     public void SwitchDesktop(IVirtualDesktop desktop)
         => this.InvokeMethod(Args(((VirtualDesktop)desktop).ComObject));
 
-    public void SwitchDesktopAndMoveForegroundView(IVirtualDesktop desktop)
-        => this.InvokeMethod(Args(((VirtualDesktop)desktop).ComObject));
-
     public void MoveDesktop(IVirtualDesktop pMove, int nIndex)
         => this.InvokeMethod(Args(((VirtualDesktop)pMove).ComObject, nIndex));
 
