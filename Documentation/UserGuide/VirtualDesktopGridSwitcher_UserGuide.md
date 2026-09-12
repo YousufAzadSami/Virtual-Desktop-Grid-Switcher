@@ -1,85 +1,176 @@
-﻿﻿﻿﻿﻿﻿﻿Virtual Desktop Grid Switcher User Guide
-========================================
+# Virtual Desktop Grid Switcher User Guide
 
-Virtual Desktop Grid Switcher allows you to switch and move the current active window between Windows 10 / 11 Virtual Desktops in a virtual grid layout using arrow keys. This is helpful if like me you use more than a few desktops. The default layout is a 3x3 grid of desktops.
+Virtual Desktop Grid Switcher is a Windows notification-area application that arranges the system's virtual desktops as a row-major grid. It provides global hotkeys for switching desktops, moving the foreground window, pinning a window across desktops, and toggling always-on-top.
 
-You can also make a window always visible on top of other windows or sticky (visible on all desktops) using a keyboard shortcut when that window is active.
+> **Desktop-count warning:** the current application enforces exactly `Rows × Columns` real virtual desktops whenever it starts or applies settings. It creates missing desktops and removes surplus desktops. The default 3 × 3 grid therefore enforces nine desktops.
 
-Once the application is running you will see a new icon in your system tray.
+See the [installation guide](../Installation/VirtualDesktopGridSwitcher_Installation.md) before the first launch.
 
-![image1](./attachment/image1.png)
+## Notification-area menu
 
-If you right click this you can exit or modify the settings.
+The application has no main window. While it is running, a numbered icon identifies the current desktop in the Windows notification area.
 
-![image2](./attachment/image2.png)
+![Numbered Virtual Desktop Grid Switcher icon](attachment/image1.png)
 
-Grid Layout
------------
+Right-click the icon to open its menu:
 
-You can change the Columns and Rows in your grid. If you do this you will probably want to change the icons used for each desktop. These can be found in the Icons folder of your installation. Alternative icon sets are available from VirtuaWin which inspired the development of this program at https://virtuawin.sourceforge.io/?page_id=48
+![Virtual Desktop Grid Switcher notification-area menu](attachment/image2.png)
 
-When you increase the number of desktops required they are automatically created for you. Reducing the number required leaves them for you to delete using the usual method (but you will not be able to access them via the arrow keys).
+- **Settings** opens grid and hotkey configuration.
+- **About** displays application information.
+- **Exit** stops the application and unregisters its hotkeys.
 
-DO NOT PUT TOO LARGE NUMBERS IN THE ROWS AND COLUMNS AS WINDOWS WILL GRIND TO A HALT with so many desktops and you will have a hard time deleting them all. Even restarting won’t help!
+If the icon is hidden, use Windows taskbar settings to move it out of the notification-area overflow menu.
 
-You can enable Wrap Around mode which means that if you go right from the rightmost desktop it wraps around to the leftmost in the same row and vice versa and same for up and down in columns.
+## Grid layout
 
-Key Assignment
---------------
+Desktops are numbered from left to right and then top to bottom. The default 3 × 3 grid is:
 
-You can change the key combinations for switching desktops, moving the currently active window to another desktop and switching to that desktop, and the Always on Top and Sticky Window features.
+```text
+1  2  3
+4  5  6
+7  8  9
+```
 
-Note that if another program is already using a key combination you will be warned that it could not be assigned. You will either need to change the key combinations or find out what is using it already and stop it from doing so. Often your graphics software has some of these keys assigned.
+Moving right from desktop 3 remains on desktop 3 unless **Wrap Around** is enabled. With wrapping enabled, it moves to desktop 1. Vertical movement follows the same rule within each column.
 
-Each operation Switch/Move by Direction/Position and Always On Top/Sticky Window can be enabled/disabled separately. 
+### Changing rows or columns
 
-The modifier keys for each group of operations can be configured separately.
+Open **Settings**, change **Rows** or **Columns**, and select **Apply**. Applying settings immediately restarts desktop management and changes the real desktop count:
 
-You can configure the direction keys for Switch/Move to use different keys than the arrow keys.
+- If `Rows × Columns` is larger than the current count, desktops are created.
+- If it is smaller, surplus desktops are removed.
 
-You can enable number and/or F1-12 keys to switch/move to a particular desktop by number and also a set of custom keys for desktops 1-12 (it is actually possible to configure more if you directly edit the file VirtualDesktopGridSwitcher.Settings - click Apply in settings if you don't have that file). Note that the F1-12 keys are very commonly already assigned for other uses.
+Use positive values only. The current validation is limited, and very large grids can make Windows slow or unstable.
 
-For setting a key simply click in the key setting box and press the key you want. Pressing delete will toggle between assigning the delete key and clearing/disabling that key setting.
+The application ships numbered icons only for desktops 1 through 12. Do not configure more than 12 desktops in the current version; switching to a desktop without a corresponding icon is not handled safely.
 
-Window Activation on Switch From Empty Desktop
-----------------------------------------------
+## Default hotkeys
 
-Virtual Desktop Grid Switcher fixes an issue in Windows 10 where switching from a desktop which is empty to a desktop which had an activate window does not reactivate that window.
+| Action | Default shortcut |
+|---|---|
+| Switch left/right/up/down | **Ctrl+Alt+Arrow key** |
+| Move the foreground window and switch left/right/up/down | **Ctrl+Alt+Shift+Arrow key** |
+| Switch directly to desktop 1–9 | **Ctrl+Alt+1–9** |
+| Move the foreground window and switch to desktop 1–9 | **Ctrl+Alt+Shift+1–9** |
+| Toggle always-on-top for the foreground window | **Ctrl+Alt+Space** |
+| Toggle sticky/pinned state for the foreground window | **Ctrl+Alt+Shift+Space** |
 
-Opening Word / Excel / Acrobat Reader Documents
------------------------------------------------
+“Move” always acts on the current foreground window and then switches to the destination desktop.
 
-Word and Excel documents opened from windows explorer or menus can end up opening on another desktop if there is another document open on another window. Oddly, my current version of Office 365 version 2107 seems to fix this for Word but not Excel!
+A sticky window is pinned through the Windows virtual-desktop API so that it appears on every desktop. Always-on-top is independent: it controls whether the window remains above ordinary windows.
 
-This also happens for PDFs opened in Acrobat Reader with tabbed mode disabled. 
+Some packaged applications, special system windows, or applications with unusual window ownership may not support moving or pinning correctly.
 
-Virtual Desktop Grid Switcher attempts to detect the switching of the desktop to that of the other document and then the new document in quick succession and moves the new document window to the original desktop. 
+## Configuring hotkeys
 
-If this is not working for you, you may need to increase the MoveOnNewWindowDetectTimeoutMs value in the VirtualDesktopGridSwitcher.Settings file - click Apply in settings if you don't have one. This is in milliseconds and determines what "quick succession" means. In version 2.5.0.0 this was increased to 3 seconds since this seems to be necessary unless the file is simple to load in Excel.
+The Settings dialog separates shortcuts into these groups:
 
-You can also add the executable name for other programs you think might benefit from this to MoveOnNewWindowExeNames (or remove word and excel if it is causing problems for you or prefer the original behaviour).
+- **By Direction**: switch or move using arrows or configured direction keys.
+- **By Position**: switch or move directly using numbers, F1–F12, or custom keys.
+- **Sticky Window** and **Always On Top**: configure each toggle independently.
 
-Support
--------
+Each action group has its own enable checkbox and Ctrl, Win, Alt, and Shift modifiers.
 
-If you have questions please ask them on the SourceForge Discussion Page <https://sourceforge.net/p/virtual-desktop-grid-switcher/discussion/>
+Additional behavior:
 
-If you think something is not working correctly raise a ticket on the SourceForge Tickets Page <https://sourceforge.net/p/virtual-desktop-grid-switcher/tickets/>
+- **Arrow / Direction Keys** enables the standard arrow keys.
+- **Numbers 1–9** enables direct shortcuts for existing desktops up to desktop 9.
+- **F1–F12** enables direct shortcuts for existing desktops up to desktop 12.
+- The twelve desktop key fields allow custom action keys.
+- Select a key field and press a key to assign it. Press **Delete** while a value is selected to clear it.
 
-Default Browser Activation (Disabled by default since v2.5.0.0)
-------------------------------------------------
+Only assign custom keys for desktop positions that exist in the configured grid. The current application does not guard custom shortcuts that target a nonexistent desktop.
 
-In the past, Chrome and Firefox and Internet Explorer did not open links clicked in other programs in a new tab in an existing window on the same desktop if there is another browser window open on another desktop which has been used more recently. 
+Select **Apply** to register the new hotkeys, apply the grid, and save settings. Select **Cancel** to close the dialog without applying the displayed changes.
 
-All modern browsers now seem to work as you would want - they even open links in a new window on the current desktop if there is a window on another desktop already open.
+### Hotkey conflicts
 
-Version 2.5.0.0 will disable this setting if it was previously enabled since it should no longer be needed and it is no longer displayed in the settings window. If you find you still need it you can enable it by editing the VirtualDesktopGridSwitcher.Settings file and setting ActivateWebBrowserOnSwitch to true - click Apply in settings if you don't have that file.
+Windows permits only one application to own a particular global hotkey. If registration fails:
 
-If you have a progran other than Chrome or Firefox that you want to try this with you can manually add a BrowserInfo section in the VirtualDesktopGridSwitcher.Settings file in your installation folder. You will need to know the Class Name and executable name for your browser - AutoHotKey or Visual Studio Window Spy can do this or contact support for assistance.
+1. Check whether the same shortcut has multiple assignments in this application.
+2. Change the shortcut in Settings.
+3. Check graphics, keyboard, window-management, launcher, and automation utilities for conflicting shortcuts.
 
-Default Browser Activation attempts to make programs with this problem do the right thing too if they are your default browser. This should mean that if you have an existing window open on your current desktop it should open links in a new tab in the same window even if you used a window on another desktop more recently. However if you do not have a browser window on your current desktop it will still switch to the last desktop you were on that has a browser (even if very briefly).
+A failed shortcut is unavailable, but other successfully registered shortcuts may continue to work.
 
-This is accomplished by detecting on switching desktops if there is a browser window on the new desktop and activates it (top one if more than one) and then re-activates the window you were last using on that desktop (if it knows).
+## Wrap-around behavior
 
-You may notice a "flash" due to the 2 windows being activated especially if the browser window was minimised. If the browser was minimised it is re-minimised also. The other side effect is that the browser may now be on top of windows that it was not and is the 2nd window in the ALT-Tab order. I have attempted to put the window back underneath other windows but not found a fast enough way to detect the window to put it under.
+When **Wrap Around** is disabled, moving beyond a grid edge keeps you on the current desktop. When enabled:
 
+- Left/right wraps within the current row.
+- Up/down wraps within the current column.
+
+The same destination calculation is used for switching and moving a window.
+
+## Detecting switches made outside the application
+
+The application polls Windows to detect desktop changes made through Task View or other shortcuts. Polling is enabled by default with a 500 ms interval.
+
+Leave polling enabled in the current version. The shutdown/restart path is not yet safe when polling is disabled. The interval must be a positive number of milliseconds; excessively small values add unnecessary work.
+
+Avoid adding or removing desktops through another tool while Virtual Desktop Grid Switcher is running. Its desktop lookup is built when management starts and is not designed to track external changes to the desktop collection.
+
+## Window activation and document-opening workarounds
+
+The application remembers recently active windows and attempts to restore focus when switching from an empty desktop.
+
+It also contains a workaround for Word, Excel, and Adobe Acrobat Reader windows that may initially open on the desktop containing another document window. By default, these executable names are monitored:
+
+- `WINWORD.EXE`
+- `EXCEL.EXE`
+- `AcroRd32.exe`
+
+The detection window defaults to 5000 ms. These advanced values are not exposed in the Settings dialog; they can be changed in `VirtualDesktopGridSwitcher.Settings` using `MoveOnNewWindowExeNames` and `MoveOnNewWindowDetectTimeoutMs`.
+
+Legacy default-browser activation logic also exists but is disabled by default because modern browsers generally handle cross-desktop links correctly.
+
+## Settings file
+
+Settings are serialized as XML beside the executable:
+
+```text
+VirtualDesktopGridSwitcher.Settings
+```
+
+Exit the application and back up the file before editing it manually. Invalid XML or unsupported values can prevent startup or cause runtime errors. Starting without a settings file restores defaults, including the 3 × 3 desktop grid, so deleting the file is not a harmless reset.
+
+The most important advanced settings are:
+
+| Setting | Purpose | Default |
+|---|---|---:|
+| `TimerEnabled` | Detect desktop switches made outside this application | `true` |
+| `IntervalMs` | Polling interval in milliseconds | `500` |
+| `MoveOnNewWindowDetectTimeoutMs` | Detection window for document-opening workaround | `5000` |
+| `MoveOnNewWindowExeNames` | Executables monitored by that workaround | Word, Excel, Acrobat Reader |
+| `ActivateWebBrowserOnSwitch` | Legacy browser-activation workaround | `false` |
+
+## Multiple monitors
+
+Windows virtual desktops are system-wide in this application. The grid cannot switch an independent desktop on only one monitor.
+
+## Troubleshooting and support
+
+### Desktop initialization error
+
+Do not repeatedly relaunch the application. Record the Windows edition, display version, build, and UBR shown by `winver`, then check the [Windows compatibility notes](../Technical/WINDOWS_COMPATIBILITY.md).
+
+### Wrong number of desktops
+
+The application intentionally synchronizes Windows to the configured `Rows × Columns` count. Exit the application before manually reorganizing desktops if you do not want it to enforce that count again.
+
+### Window does not move or become sticky
+
+Make sure the intended window is in the foreground. Some system, packaged, elevated, or specially owned windows cannot be manipulated through the same APIs as ordinary desktop windows.
+
+### Reporting a problem
+
+Use the repository's [GitHub issue tracker](https://github.com/YousufAzadSami/Virtual-Desktop-Grid-Switcher/issues). Include:
+
+- Application version
+- Windows edition, display version, build, and UBR
+- Grid dimensions and relevant hotkey settings
+- Exact steps and error text
+- Whether the operation was switching, moving, pinning, or changing the desktop collection
+
+Do not include confidential window titles, settings, or logs without reviewing them first.
