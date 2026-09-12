@@ -44,9 +44,6 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 
-.hg
-.hgtags
-
 Package/
 
 .editorconfig

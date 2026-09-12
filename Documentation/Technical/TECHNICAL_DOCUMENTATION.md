@@ -73,7 +73,7 @@ Project lineage:
 │       └── ERROR_HANDLING_LOGGING_PLAN.md       # Detailed proposal; not implemented
 ├── Package/                                     # Historical distribution payload/icons/docs
 ├── ROADMAP.md                                   # Prioritized work and release prerequisites
-└── Windows10SDKVS13_*.props, .hg*               # Historical migration artifacts
+└── Windows10SDKVS13_*.props                     # Historical Visual Studio migration artifacts
 ```
 
 The main solution contains only:
@@ -309,7 +309,7 @@ These are navigation warnings, not an exhaustive bug list:
 - `Documentation/Technical/WINDOWS_COMPATIBILITY.md` records the exact compatibility implementation and test scope; it is not proof for every future Windows revision.
 - `Documentation/Technical/NET8_MIGRATION_RECORD.md` records the current framework migration; project files are the final authority.
 - `ROADMAP.md` and `Documentation/Technical/ERROR_HANDLING_LOGGING_PLAN.md` describe proposed work, not implemented features.
-- `.hgignore`, `.hgtags`, root `Windows10SDKVS13_*.props`, and much of `Package/` are historical/migration artifacts.
+- Root `Windows10SDKVS13_*.props` and much of `Package/` are historical/migration artifacts.
 - `VirtualDesktop-master/README.md` and its nested workflows reflect the vendored library snapshot and are stale regarding this application fork's .NET 8-only target.
 
 ## Glossary
